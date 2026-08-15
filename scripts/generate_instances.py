@@ -18,28 +18,35 @@ import json
 import os
 import sys
 
-#: Set representations under test. One benchmark each, so a tool can enter a subset.
-#: ``test`` is not a representation: its operations do nothing, so what it measures is
-#: the harness and process overhead to subtract from the others.
+#: Set representations under test. Each yields two benchmarks — the plain one and a
+#: ``-batched`` one — so a tool can enter either without the other. ``test`` is not a
+#: representation: its operations do nothing, so what it measures is the harness and
+#: process overhead to subtract from the others.
 BENCHMARKS = [
     "test",
     "interval",
     "zonotope",
 ]
 
+#: Suffix and sizes of the batched variant, where the operation runs on a batch of sets
+#: at once. Absent ``batch_size`` in params means the unbatched benchmark.
+BATCHED_SUFFIX = "-batched"
+BATCH_SIZES = [10, 100]
+
 #: Dimensions each operation is measured at.
 DIMENSIONS = [1, 2, 5, 10, 50, 100, 500, 1000]
 
 #: Where the operation runs. Both are always listed; a library without GPU support
-#: reports ``unknown`` for the gpu instances.
+#: reports ``unsupported`` for the gpu instances.
 DEVICES = ["cpu", "gpu"]
 
-#: Operations, each measured at every dimension on every device. ``params`` builds the
-#: JSON object the tool receives; operations added later may take more than dim/device.
+#: Operations, each measured at every dimension on every device, batched and unbatched.
+#: An operation needing more than the common dim/device/batch_size adds a ``params``
+#: callable returning those extras (see ``params_for``).
 OPERATIONS = [
-    {"name": "generateRandom", "params": lambda dim, device: {"dim": dim, "device": device}},
-    {"name": "matMul", "params": lambda dim, device: {"dim": dim, "device": device}},
-    {"name": "minkSum", "params": lambda dim, device: {"dim": dim, "device": device}},
+    {"name": "generateRandom"},
+    {"name": "matMul"},
+    {"name": "minkSum"},
 ]
 
 #: How often a tool repeats the operation inside one instance, so a single measurement
@@ -57,25 +64,45 @@ HEADER = ["benchmark", "instance", "repetition", "device", "params"]
 OUTPUT_FILE = "instances.csv"
 
 
-def instance_name(operation: str, dim: int, device: str) -> str:
-    return f"{operation}-{dim}d-{device}"
+def instance_name(operation: str, dim: int, batch_size, device: str) -> str:
+    """``<operation>-<n>d[-b<batch>]-<device>``. The batch size is part of the name
+    because it is what distinguishes two instances of the same batched benchmark."""
+    batch = f"-b{batch_size}" if batch_size is not None else ""
+    return f"{operation}-{dim}d{batch}-{device}"
+
+
+def params_for(operation: dict, dim: int, batch_size, device: str) -> dict:
+    """The JSON object the tool receives. ``batch_size`` appears only for the batched
+    benchmarks, so its absence is what tells a tool the operation is unbatched."""
+    params = {"dim": dim, "device": device}
+    if batch_size is not None:
+        params["batch_size"] = batch_size
+    extra = operation.get("params")
+    if extra is not None:
+        params.update(extra(dim=dim, batch_size=batch_size, device=device))
+    return params
 
 
 def rows(repetitions: int):
-    """Every ``(benchmark, instance, repetition, device, params)`` row, benchmark-major
-    then operation, dimension, and device — so a cpu/gpu pair sits on adjacent lines."""
-    for benchmark in BENCHMARKS:
-        for operation in OPERATIONS:
-            for dim in DIMENSIONS:
-                for device in DEVICES:
-                    params = operation["params"](dim, device)
-                    yield [
-                        benchmark,
-                        instance_name(operation["name"], dim, device),
-                        repetitions,
-                        device,
-                        json.dumps(params),
-                    ]
+    """Every ``(benchmark, instance, repetition, device, params)`` row: each set
+    representation unbatched, then batched, and within each operation, dimension, batch
+    size, and device — so a cpu/gpu pair sits on adjacent lines."""
+    for representation in BENCHMARKS:
+        for benchmark, batch_sizes in (
+            (representation, [None]),
+            (representation + BATCHED_SUFFIX, BATCH_SIZES),
+        ):
+            for operation in OPERATIONS:
+                for dim in DIMENSIONS:
+                    for batch_size in batch_sizes:
+                        for device in DEVICES:
+                            yield [
+                                benchmark,
+                                instance_name(operation["name"], dim, batch_size, device),
+                                repetitions,
+                                device,
+                                json.dumps(params_for(operation, dim, batch_size, device)),
+                            ]
 
 
 def render(repetitions: int) -> str:

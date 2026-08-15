@@ -18,26 +18,30 @@ as quoted when it *starts* with a quote. No value may contain a semicolon.
 benchmark;instance;repetition;device;params
 interval;generateRandom-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
 zonotope;matMul-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-zonotope;minkSum-1000d-cpu;100;cpu;{"dim": 1000, "device": "cpu"}
+zonotope-batched;minkSum-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
 ```
 
 | Column | Meaning |
 | --- | --- |
-| `benchmark` | The set representation under test. A tool enters one or more of them. |
-| `instance` | `<operation>-<n>d-<device>` — the operation, the dimension it runs at, and where it runs. |
+| `benchmark` | The set representation under test, batched or not. A tool enters one or more of them. |
+| `instance` | `<operation>-<n>d[-b<batch>]-<device>` — the operation, the dimension it runs at, the batch size for a batched benchmark, and where it runs. |
 | `repetition` | How often the tool repeats the operation *within* the instance, so one measurement averages over repeats rather than timing a single noisy call. |
 | `device` | `cpu` or `gpu`. Also in the instance name and in `params`, so it is filterable, readable, and available to a tool that only parses `params`. |
-| `params` | JSON object with the operation's arguments: `dim` and `device` today, more for later operations. |
+| `params` | JSON object with the operation's arguments: `dim`, `device`, and `batch_size` on the batched benchmarks. Later operations may add more. |
 
 Every column is passed to the tool's `prepare_instance.sh` / `run_instance.sh` in file
 order, after the interface version.
 
 ## Benchmarks
 
-- `test` — not a set representation. Its operations do nothing, so the time they measure
-  is the harness and process overhead, to subtract from the real benchmarks.
-- `interval`
-- `zonotope`
+Each set representation gives two benchmarks — plain and `-batched` — so a library
+without a vectorized path can enter one without the other.
+
+- `test` / `test-batched` — not a set representation. Its operations do nothing, so the
+  time they measure is the harness and process overhead, to subtract from the real
+  benchmarks.
+- `interval` / `interval-batched`
+- `zonotope` / `zonotope-batched`
 
 ## Operations
 
@@ -49,6 +53,18 @@ devices. "Random set" always means a non-degenerate set of the requested dimensi
 - **`matMul`** — generate a random `n × n` matrix and a random set of dimension `n`, then
   multiply them.
 - **`minkSum`** — generate two random sets of dimension `n`, then add them.
+
+## Batching
+
+On a `-batched` benchmark, every set the operation would have created becomes a batch of
+`batch_size` sets of dimension `n`, and the operation is applied to the whole batch in one
+call — the vectorized path, rather than a loop over `batch_size` single sets. `matMul`
+multiplies the batch by a single random `n × n` matrix; `minkSum` adds two batches
+elementwise.
+
+`batch_size` is `10` or `100`, and appears only in the batched benchmarks' `params`, so
+its absence is what tells a tool the operation is unbatched (`params.get("batch_size", 1)`
+covers both).
 
 ## Devices
 
@@ -71,6 +87,8 @@ python scripts/generate_instances.py            # rewrite instances.csv
 python scripts/generate_instances.py --check    # fail if it is out of date
 ```
 
-To add a benchmark, an operation, or a dimension, edit the corresponding table at the top
-of [`scripts/generate_instances.py`](scripts/generate_instances.py) and regenerate. An
-operation that needs more than `dim` supplies it from its own `params` function.
+To add a set representation, an operation, a dimension, a device, or a batch size, edit
+the corresponding table at the top of
+[`scripts/generate_instances.py`](scripts/generate_instances.py) and regenerate. An
+operation needing more than the common `dim` / `device` / `batch_size` adds a `params`
+callable returning those extras.
