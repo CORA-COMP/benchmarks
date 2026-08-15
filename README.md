@@ -53,11 +53,17 @@ Each is measured at every dimension `n ∈ {1, 2, 5, 10, 50, 100, 500, 1000}` on
 devices, on the `interval` and `zonotope` benchmarks. "Random set" always means a
 non-degenerate set of the requested dimension. (`test` runs none of these — see above.)
 
-- **`generateRandom`** — initialize a random non-degenerate set of dimension `n` (for a
-  zonotope, that means `n` generators).
-- **`matMul`** — generate a random `n × n` matrix and a random set of dimension `n`, then
-  multiply them.
-- **`minkSum`** — generate two random sets of dimension `n`, then add them.
+Only the operation itself is timed. A tool generates the inputs in `prepare_instance.sh`,
+which is untimed, and `run_instance.sh` reads them back once and then performs the
+operation `repetition` times.
+
+| Operation | Prepared (untimed) | Measured |
+| --- | --- | --- |
+| `generateRandom` | — | initialize a random set of dimension `n` (for a zonotope, `n` generators) |
+| `matMul` | a random `n × n` matrix and a random set of dimension `n` | the multiplication |
+| `minkSum` | two random sets of dimension `n` | the addition |
+
+`generateRandom` has nothing to prepare because the initialization *is* the operation.
 
 ## Batching
 
