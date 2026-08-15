@@ -62,16 +62,22 @@ OPERATIONS = [
 #: is an average rather than one noisy sample.
 DEFAULT_REPETITIONS = 100
 
+#: Wall-clock cap per instance, in seconds, enforced by the harness. A cap, not a budget:
+#: the largest instance a library handles comfortably is a second or two of work, so a tool
+#: that needs a minute is out of reach of the comparison and reports `timeout`. Uncapped,
+#: one batched instance at the top dimension can hold a worker for days.
+DEFAULT_TIMEOUT = 60
+
 #: Semicolon-separated, because ``params`` is JSON and contains commas. Fields are
 #: written unquoted so the JSON stays readable: a standard CSV reader still parses it,
 #: since a field only counts as quoted when it *starts* with a quote and JSON objects
 #: start with ``{``. The cost is that no value may contain a semicolon — the writer
 #: raises rather than emitting a file that would parse wrong.
 DELIMITER = ";"
-#: The columns are the platform's — what to group by, what to call the row — and
-#: ``params`` is the tool's: everything a tool reads lives there, so no field needs a
-#: second copy in a column of its own.
-HEADER = ["benchmark", "instance", "params"]
+#: The columns are the platform's — what to group by, what to call the row, how long to
+#: allow it — and ``params`` is the tool's: everything a tool reads lives there, so no
+#: field needs a second copy in a column of its own.
+HEADER = ["benchmark", "instance", "params", "timeout"]
 
 OUTPUT_FILE = "instances.csv"
 
@@ -100,16 +106,17 @@ def params_for(representation: str, operation: dict, dim: int, batch_size, devic
     return params
 
 
-def rows(repetitions: int):
-    """Every ``(benchmark, instance, params)`` row: the overhead instance, then each set
-    representation unbatched and batched, and within each operation, dimension, batch
-    size, and device — so a cpu/gpu pair sits on adjacent lines."""
+def rows(repetitions: int, timeout: int):
+    """Every ``(benchmark, instance, params, timeout)`` row: the overhead instance, then
+    each set representation unbatched and batched, and within each operation, dimension,
+    batch size, and device — so a cpu/gpu pair sits on adjacent lines."""
     yield [
         OVERHEAD_BENCHMARK,
         instance_name(OVERHEAD_OPERATION, OVERHEAD_DIM, None, OVERHEAD_DEVICE),
         json.dumps({"set": OVERHEAD_SET, "operation": OVERHEAD_OPERATION,
                     "dim": OVERHEAD_DIM, "device": OVERHEAD_DEVICE,
                     "repetition": OVERHEAD_REPETITIONS}),
+        timeout,
     ]
     for representation in BENCHMARKS:
         for benchmark, batch_sizes in (
@@ -125,17 +132,18 @@ def rows(repetitions: int):
                                 instance_name(operation["name"], dim, batch_size, device),
                                 json.dumps(params_for(representation, operation, dim,
                                                       batch_size, device, repetitions)),
+                                timeout,
                             ]
 
 
-def render(repetitions: int) -> str:
+def render(repetitions: int, timeout: int) -> str:
     buffer = io.StringIO()
     # quotechar=None so the JSON's own quotes are written through untouched; a value
     # containing the delimiter then raises instead of being silently mangled.
     writer = csv.writer(buffer, delimiter=DELIMITER, lineterminator="\n",
                         quoting=csv.QUOTE_NONE, quotechar=None)
     writer.writerow(HEADER)
-    writer.writerows(rows(repetitions))
+    writer.writerows(rows(repetitions, timeout))
     return buffer.getvalue()
 
 
@@ -144,13 +152,15 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--repetitions", type=int, default=DEFAULT_REPETITIONS,
                         help=f"repetitions per instance (default: {DEFAULT_REPETITIONS})")
+    parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT,
+                        help=f"per-instance wall-clock cap in seconds (default: {DEFAULT_TIMEOUT})")
     parser.add_argument("--output", default=os.path.join(repo_root, OUTPUT_FILE),
                         help=f"where to write (default: {OUTPUT_FILE} in the repo root)")
     parser.add_argument("--check", action="store_true",
                         help="do not write; exit nonzero if the file is out of date")
     args = parser.parse_args(argv)
 
-    content = render(args.repetitions)
+    content = render(args.repetitions, args.timeout)
     if args.check:
         try:
             with open(args.output, encoding="utf-8", newline="") as fh:

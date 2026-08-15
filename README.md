@@ -15,10 +15,10 @@ the JSON stays readable — a standard CSV reader still parses it, since a field
 as quoted when it *starts* with a quote. No value may contain a semicolon.
 
 ```
-benchmark;instance;params
-interval;generateRandom-1d-cpu;{"set": "interval", "operation": "generateRandom", "dim": 1, "device": "cpu", "repetition": 100}
-zonotope;matMul-500d-gpu;{"set": "zonotope", "operation": "matMul", "dim": 500, "device": "gpu", "repetition": 100}
-zonotope-batched;minkSum-1000d-b10-cpu;{"set": "zonotope", "operation": "minkSum", "dim": 1000, "device": "cpu", "repetition": 100, "batch_size": 10}
+benchmark;instance;params;timeout
+interval;generateRandom-1d-cpu;{"set": "interval", "operation": "generateRandom", "dim": 1, "device": "cpu", "repetition": 100};60
+zonotope;matMul-500d-gpu;{"set": "zonotope", "operation": "matMul", "dim": 500, "device": "gpu", "repetition": 100};60
+zonotope-batched;minkSum-1000d-b10-cpu;{"set": "zonotope", "operation": "minkSum", "dim": 1000, "device": "cpu", "repetition": 100, "batch_size": 10};60
 ```
 
 | Column | Meaning |
@@ -26,6 +26,7 @@ zonotope-batched;minkSum-1000d-b10-cpu;{"set": "zonotope", "operation": "minkSum
 | `benchmark` | The set representation under test, batched or not. A tool enters one or more of them. |
 | `instance` | `<operation>-<n>d[-b<batch>]-<device>` — the operation, the dimension it runs at, the batch size for a batched benchmark, and where it runs. |
 | `params` | JSON object with everything the tool needs (see below). |
+| `timeout` | Wall-clock cap in seconds, enforced by the harness; an instance that exceeds it is recorded `timeout`. A cap, not a budget — see below. |
 
 | `params` field | Meaning |
 | --- | --- |
@@ -36,9 +37,9 @@ zonotope-batched;minkSum-1000d-b10-cpu;{"set": "zonotope", "operation": "minkSum
 | `repetition` | How often the tool repeats the operation *within* the instance, so one measurement averages over repeats rather than timing a single noisy call. |
 | `batch_size` | Only on the batched benchmarks; its absence is what says the operation is unbatched. |
 
-The two columns are the platform's — what a submission enters and what results are grouped
-by — and `params` is the tool's: everything a tool dispatches on is in there, so it never
-has to take a name apart. The instance name repeats those facts in a form that is readable
+The three other columns are the platform's — what a submission enters, what results are
+grouped by, how long an instance may take — and `params` is the tool's: everything a tool
+dispatches on is in there, so it never has to take a name apart. The instance name repeats those facts in a form that is readable
 and sortable in the results table, and nothing else does, since a second copy would only be
 one more thing to keep in step.
 
@@ -57,9 +58,9 @@ Plus one that is not a set representation:
 
 - `test` — a single instance, `startup-1d-cpu`, run once. The tool starts up and does the
   least it can: initialize one set of dimension 1, of the representation its `set` names
-  (a zonotope). What it measures is therefore the
-  fixed per-instance cost — process and library startup — to subtract from every other
-  measurement. Enter it alongside whatever else you run.
+  (a zonotope). What it measures is therefore the fixed per-instance cost — process and
+  library startup — to subtract from every other measurement. Enter it alongside whatever
+  else you run.
 
 ## Operations
 
@@ -91,6 +92,16 @@ two batches elementwise.
 `batch_size` is `10` or `100`, and appears only in the batched benchmarks' `params`, so
 its absence is what tells a tool the operation is unbatched (`params.get("batch_size", 1)`
 covers both).
+
+## Timeouts
+
+Every instance carries a `timeout` of 60 seconds, which the harness enforces on
+`run_instance.sh`; exceeding it is recorded as `timeout` and the run moves on. It is a cap,
+not a budget: the operations here are milliseconds to a second or so of work for a library
+that has a path for them, so a minute means the instance is out of reach rather than merely
+slow. Without one, a single batched instance at the top dimension can hold a worker for
+days — a batch of 100 zonotopes in 1000 dimensions is 10^11 floating-point operations per
+repetition, and there are a hundred of those.
 
 ## Devices
 
