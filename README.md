@@ -15,10 +15,10 @@ the JSON stays readable — a standard CSV reader still parses it, since a field
 as quoted when it *starts* with a quote. No value may contain a semicolon.
 
 ```
-benchmark;instance;repetition;device;params
-interval;generateRandom-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
-zonotope;matMul-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-zonotope-batched;minkSum-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
+benchmark;instance;repetition;params
+interval;generateRandom-1d-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu"}
+zonotope;matMul-500d-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu"}
+zonotope-batched;minkSum-1000d-b10-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu", "batch_size": 10}
 ```
 
 | Column | Meaning |
@@ -26,8 +26,12 @@ zonotope-batched;minkSum-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "b
 | `benchmark` | The set representation under test, batched or not. A tool enters one or more of them. |
 | `instance` | `<operation>-<n>d[-b<batch>]-<device>` — the operation, the dimension it runs at, the batch size for a batched benchmark, and where it runs. |
 | `repetition` | How often the tool repeats the operation *within* the instance, so one measurement averages over repeats rather than timing a single noisy call. |
-| `device` | `cpu` or `gpu`. Also in the instance name and in `params`, so it is filterable, readable, and available to a tool that only parses `params`. |
-| `params` | JSON object with the operation's arguments: `dim`, `device`, and `batch_size` on the batched benchmarks. Later operations may add more. |
+| `params` | JSON object with everything the operation needs: `operation`, `dim`, `device`, and `batch_size` on the batched benchmarks. Later operations may add more. |
+
+Everything a tool dispatches on is in `params`, so it never has to take the instance name
+apart; the name repeats the same facts in a form that is readable and sortable in the
+results table. There is deliberately no separate `device` column — a third copy would only
+be one more thing to keep in step.
 
 Every column is passed to the tool's `prepare_instance.sh` / `run_instance.sh` in file
 order, after the interface version.
@@ -62,6 +66,7 @@ operation `repetition` times.
 | `generateRandom` | — | initialize a random set of dimension `n` (for a zonotope, `n` generators) |
 | `matMul` | a random `n × n` matrix and a random set of dimension `n` | the multiplication |
 | `minkSum` | two random sets of dimension `n` | the addition |
+| `convHull` | two random sets of dimension `n` | the convex hull — for a representation that is not closed under it (a zonotope, an interval), the tightest enclosure the representation admits |
 
 `generateRandom` has nothing to prepare because the initialization *is* the operation.
 
@@ -70,8 +75,8 @@ operation `repetition` times.
 On a `-batched` benchmark, every set the operation would have created becomes a batch of
 `batch_size` sets of dimension `n`, and the operation is applied to the whole batch in one
 call — the vectorized path, rather than a loop over `batch_size` single sets. `matMul`
-multiplies the batch by a single random `n × n` matrix; `minkSum` adds two batches
-elementwise.
+multiplies the batch by a single random `n × n` matrix; `minkSum` and `convHull` combine
+two batches elementwise.
 
 `batch_size` is `10` or `100`, and appears only in the batched benchmarks' `params`, so
 its absence is what tells a tool the operation is unbatched (`params.get("batch_size", 1)`

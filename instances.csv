@@ -1,290 +1,386 @@
-benchmark;instance;repetition;device;params
-test;startup-1d-cpu;1;cpu;{"dim": 1, "device": "cpu"}
-interval;generateRandom-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
-interval;generateRandom-1d-gpu;100;gpu;{"dim": 1, "device": "gpu"}
-interval;generateRandom-2d-cpu;100;cpu;{"dim": 2, "device": "cpu"}
-interval;generateRandom-2d-gpu;100;gpu;{"dim": 2, "device": "gpu"}
-interval;generateRandom-5d-cpu;100;cpu;{"dim": 5, "device": "cpu"}
-interval;generateRandom-5d-gpu;100;gpu;{"dim": 5, "device": "gpu"}
-interval;generateRandom-10d-cpu;100;cpu;{"dim": 10, "device": "cpu"}
-interval;generateRandom-10d-gpu;100;gpu;{"dim": 10, "device": "gpu"}
-interval;generateRandom-50d-cpu;100;cpu;{"dim": 50, "device": "cpu"}
-interval;generateRandom-50d-gpu;100;gpu;{"dim": 50, "device": "gpu"}
-interval;generateRandom-100d-cpu;100;cpu;{"dim": 100, "device": "cpu"}
-interval;generateRandom-100d-gpu;100;gpu;{"dim": 100, "device": "gpu"}
-interval;generateRandom-500d-cpu;100;cpu;{"dim": 500, "device": "cpu"}
-interval;generateRandom-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-interval;generateRandom-1000d-cpu;100;cpu;{"dim": 1000, "device": "cpu"}
-interval;generateRandom-1000d-gpu;100;gpu;{"dim": 1000, "device": "gpu"}
-interval;matMul-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
-interval;matMul-1d-gpu;100;gpu;{"dim": 1, "device": "gpu"}
-interval;matMul-2d-cpu;100;cpu;{"dim": 2, "device": "cpu"}
-interval;matMul-2d-gpu;100;gpu;{"dim": 2, "device": "gpu"}
-interval;matMul-5d-cpu;100;cpu;{"dim": 5, "device": "cpu"}
-interval;matMul-5d-gpu;100;gpu;{"dim": 5, "device": "gpu"}
-interval;matMul-10d-cpu;100;cpu;{"dim": 10, "device": "cpu"}
-interval;matMul-10d-gpu;100;gpu;{"dim": 10, "device": "gpu"}
-interval;matMul-50d-cpu;100;cpu;{"dim": 50, "device": "cpu"}
-interval;matMul-50d-gpu;100;gpu;{"dim": 50, "device": "gpu"}
-interval;matMul-100d-cpu;100;cpu;{"dim": 100, "device": "cpu"}
-interval;matMul-100d-gpu;100;gpu;{"dim": 100, "device": "gpu"}
-interval;matMul-500d-cpu;100;cpu;{"dim": 500, "device": "cpu"}
-interval;matMul-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-interval;matMul-1000d-cpu;100;cpu;{"dim": 1000, "device": "cpu"}
-interval;matMul-1000d-gpu;100;gpu;{"dim": 1000, "device": "gpu"}
-interval;minkSum-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
-interval;minkSum-1d-gpu;100;gpu;{"dim": 1, "device": "gpu"}
-interval;minkSum-2d-cpu;100;cpu;{"dim": 2, "device": "cpu"}
-interval;minkSum-2d-gpu;100;gpu;{"dim": 2, "device": "gpu"}
-interval;minkSum-5d-cpu;100;cpu;{"dim": 5, "device": "cpu"}
-interval;minkSum-5d-gpu;100;gpu;{"dim": 5, "device": "gpu"}
-interval;minkSum-10d-cpu;100;cpu;{"dim": 10, "device": "cpu"}
-interval;minkSum-10d-gpu;100;gpu;{"dim": 10, "device": "gpu"}
-interval;minkSum-50d-cpu;100;cpu;{"dim": 50, "device": "cpu"}
-interval;minkSum-50d-gpu;100;gpu;{"dim": 50, "device": "gpu"}
-interval;minkSum-100d-cpu;100;cpu;{"dim": 100, "device": "cpu"}
-interval;minkSum-100d-gpu;100;gpu;{"dim": 100, "device": "gpu"}
-interval;minkSum-500d-cpu;100;cpu;{"dim": 500, "device": "cpu"}
-interval;minkSum-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-interval;minkSum-1000d-cpu;100;cpu;{"dim": 1000, "device": "cpu"}
-interval;minkSum-1000d-gpu;100;gpu;{"dim": 1000, "device": "gpu"}
-interval-batched;generateRandom-1d-b10-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-1d-b10-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-1d-b100-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-1d-b100-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 100}
-interval-batched;generateRandom-2d-b10-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-2d-b10-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-2d-b100-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-2d-b100-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 100}
-interval-batched;generateRandom-5d-b10-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-5d-b10-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-5d-b100-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-5d-b100-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 100}
-interval-batched;generateRandom-10d-b10-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-10d-b10-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-10d-b100-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-10d-b100-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 100}
-interval-batched;generateRandom-50d-b10-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-50d-b10-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-50d-b100-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-50d-b100-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 100}
-interval-batched;generateRandom-100d-b10-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-100d-b10-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-100d-b100-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-100d-b100-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 100}
-interval-batched;generateRandom-500d-b10-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-500d-b10-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-500d-b100-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-500d-b100-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 100}
-interval-batched;generateRandom-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
-interval-batched;generateRandom-1000d-b10-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 10}
-interval-batched;generateRandom-1000d-b100-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 100}
-interval-batched;generateRandom-1000d-b100-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-1d-b10-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-1d-b10-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-1d-b100-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-1d-b100-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-2d-b10-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-2d-b10-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-2d-b100-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-2d-b100-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-5d-b10-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-5d-b10-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-5d-b100-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-5d-b100-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-10d-b10-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-10d-b10-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-10d-b100-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-10d-b100-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-50d-b10-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-50d-b10-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-50d-b100-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-50d-b100-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-100d-b10-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-100d-b10-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-100d-b100-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-100d-b100-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-500d-b10-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-500d-b10-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-500d-b100-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-500d-b100-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 100}
-interval-batched;matMul-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
-interval-batched;matMul-1000d-b10-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 10}
-interval-batched;matMul-1000d-b100-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 100}
-interval-batched;matMul-1000d-b100-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-1d-b10-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-1d-b10-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-1d-b100-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-1d-b100-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-2d-b10-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-2d-b10-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-2d-b100-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-2d-b100-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-5d-b10-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-5d-b10-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-5d-b100-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-5d-b100-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-10d-b10-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-10d-b10-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-10d-b100-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-10d-b100-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-50d-b10-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-50d-b10-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-50d-b100-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-50d-b100-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-100d-b10-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-100d-b10-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-100d-b100-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-100d-b100-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-500d-b10-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-500d-b10-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-500d-b100-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-500d-b100-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 100}
-interval-batched;minkSum-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
-interval-batched;minkSum-1000d-b10-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 10}
-interval-batched;minkSum-1000d-b100-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 100}
-interval-batched;minkSum-1000d-b100-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 100}
-zonotope;generateRandom-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
-zonotope;generateRandom-1d-gpu;100;gpu;{"dim": 1, "device": "gpu"}
-zonotope;generateRandom-2d-cpu;100;cpu;{"dim": 2, "device": "cpu"}
-zonotope;generateRandom-2d-gpu;100;gpu;{"dim": 2, "device": "gpu"}
-zonotope;generateRandom-5d-cpu;100;cpu;{"dim": 5, "device": "cpu"}
-zonotope;generateRandom-5d-gpu;100;gpu;{"dim": 5, "device": "gpu"}
-zonotope;generateRandom-10d-cpu;100;cpu;{"dim": 10, "device": "cpu"}
-zonotope;generateRandom-10d-gpu;100;gpu;{"dim": 10, "device": "gpu"}
-zonotope;generateRandom-50d-cpu;100;cpu;{"dim": 50, "device": "cpu"}
-zonotope;generateRandom-50d-gpu;100;gpu;{"dim": 50, "device": "gpu"}
-zonotope;generateRandom-100d-cpu;100;cpu;{"dim": 100, "device": "cpu"}
-zonotope;generateRandom-100d-gpu;100;gpu;{"dim": 100, "device": "gpu"}
-zonotope;generateRandom-500d-cpu;100;cpu;{"dim": 500, "device": "cpu"}
-zonotope;generateRandom-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-zonotope;generateRandom-1000d-cpu;100;cpu;{"dim": 1000, "device": "cpu"}
-zonotope;generateRandom-1000d-gpu;100;gpu;{"dim": 1000, "device": "gpu"}
-zonotope;matMul-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
-zonotope;matMul-1d-gpu;100;gpu;{"dim": 1, "device": "gpu"}
-zonotope;matMul-2d-cpu;100;cpu;{"dim": 2, "device": "cpu"}
-zonotope;matMul-2d-gpu;100;gpu;{"dim": 2, "device": "gpu"}
-zonotope;matMul-5d-cpu;100;cpu;{"dim": 5, "device": "cpu"}
-zonotope;matMul-5d-gpu;100;gpu;{"dim": 5, "device": "gpu"}
-zonotope;matMul-10d-cpu;100;cpu;{"dim": 10, "device": "cpu"}
-zonotope;matMul-10d-gpu;100;gpu;{"dim": 10, "device": "gpu"}
-zonotope;matMul-50d-cpu;100;cpu;{"dim": 50, "device": "cpu"}
-zonotope;matMul-50d-gpu;100;gpu;{"dim": 50, "device": "gpu"}
-zonotope;matMul-100d-cpu;100;cpu;{"dim": 100, "device": "cpu"}
-zonotope;matMul-100d-gpu;100;gpu;{"dim": 100, "device": "gpu"}
-zonotope;matMul-500d-cpu;100;cpu;{"dim": 500, "device": "cpu"}
-zonotope;matMul-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-zonotope;matMul-1000d-cpu;100;cpu;{"dim": 1000, "device": "cpu"}
-zonotope;matMul-1000d-gpu;100;gpu;{"dim": 1000, "device": "gpu"}
-zonotope;minkSum-1d-cpu;100;cpu;{"dim": 1, "device": "cpu"}
-zonotope;minkSum-1d-gpu;100;gpu;{"dim": 1, "device": "gpu"}
-zonotope;minkSum-2d-cpu;100;cpu;{"dim": 2, "device": "cpu"}
-zonotope;minkSum-2d-gpu;100;gpu;{"dim": 2, "device": "gpu"}
-zonotope;minkSum-5d-cpu;100;cpu;{"dim": 5, "device": "cpu"}
-zonotope;minkSum-5d-gpu;100;gpu;{"dim": 5, "device": "gpu"}
-zonotope;minkSum-10d-cpu;100;cpu;{"dim": 10, "device": "cpu"}
-zonotope;minkSum-10d-gpu;100;gpu;{"dim": 10, "device": "gpu"}
-zonotope;minkSum-50d-cpu;100;cpu;{"dim": 50, "device": "cpu"}
-zonotope;minkSum-50d-gpu;100;gpu;{"dim": 50, "device": "gpu"}
-zonotope;minkSum-100d-cpu;100;cpu;{"dim": 100, "device": "cpu"}
-zonotope;minkSum-100d-gpu;100;gpu;{"dim": 100, "device": "gpu"}
-zonotope;minkSum-500d-cpu;100;cpu;{"dim": 500, "device": "cpu"}
-zonotope;minkSum-500d-gpu;100;gpu;{"dim": 500, "device": "gpu"}
-zonotope;minkSum-1000d-cpu;100;cpu;{"dim": 1000, "device": "cpu"}
-zonotope;minkSum-1000d-gpu;100;gpu;{"dim": 1000, "device": "gpu"}
-zonotope-batched;generateRandom-1d-b10-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-1d-b10-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-1d-b100-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-1d-b100-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 100}
-zonotope-batched;generateRandom-2d-b10-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-2d-b10-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-2d-b100-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-2d-b100-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 100}
-zonotope-batched;generateRandom-5d-b10-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-5d-b10-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-5d-b100-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-5d-b100-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 100}
-zonotope-batched;generateRandom-10d-b10-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-10d-b10-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-10d-b100-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-10d-b100-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 100}
-zonotope-batched;generateRandom-50d-b10-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-50d-b10-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-50d-b100-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-50d-b100-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 100}
-zonotope-batched;generateRandom-100d-b10-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-100d-b10-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-100d-b100-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-100d-b100-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 100}
-zonotope-batched;generateRandom-500d-b10-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-500d-b10-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-500d-b100-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-500d-b100-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 100}
-zonotope-batched;generateRandom-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
-zonotope-batched;generateRandom-1000d-b10-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 10}
-zonotope-batched;generateRandom-1000d-b100-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 100}
-zonotope-batched;generateRandom-1000d-b100-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-1d-b10-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-1d-b10-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-1d-b100-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-1d-b100-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-2d-b10-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-2d-b10-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-2d-b100-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-2d-b100-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-5d-b10-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-5d-b10-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-5d-b100-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-5d-b100-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-10d-b10-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-10d-b10-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-10d-b100-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-10d-b100-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-50d-b10-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-50d-b10-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-50d-b100-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-50d-b100-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-100d-b10-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-100d-b10-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-100d-b100-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-100d-b100-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-500d-b10-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-500d-b10-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-500d-b100-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-500d-b100-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 100}
-zonotope-batched;matMul-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
-zonotope-batched;matMul-1000d-b10-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 10}
-zonotope-batched;matMul-1000d-b100-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 100}
-zonotope-batched;matMul-1000d-b100-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-1d-b10-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-1d-b10-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-1d-b100-cpu;100;cpu;{"dim": 1, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-1d-b100-gpu;100;gpu;{"dim": 1, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-2d-b10-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-2d-b10-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-2d-b100-cpu;100;cpu;{"dim": 2, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-2d-b100-gpu;100;gpu;{"dim": 2, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-5d-b10-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-5d-b10-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-5d-b100-cpu;100;cpu;{"dim": 5, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-5d-b100-gpu;100;gpu;{"dim": 5, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-10d-b10-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-10d-b10-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-10d-b100-cpu;100;cpu;{"dim": 10, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-10d-b100-gpu;100;gpu;{"dim": 10, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-50d-b10-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-50d-b10-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-50d-b100-cpu;100;cpu;{"dim": 50, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-50d-b100-gpu;100;gpu;{"dim": 50, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-100d-b10-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-100d-b10-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-100d-b100-cpu;100;cpu;{"dim": 100, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-100d-b100-gpu;100;gpu;{"dim": 100, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-500d-b10-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-500d-b10-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-500d-b100-cpu;100;cpu;{"dim": 500, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-500d-b100-gpu;100;gpu;{"dim": 500, "device": "gpu", "batch_size": 100}
-zonotope-batched;minkSum-1000d-b10-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 10}
-zonotope-batched;minkSum-1000d-b10-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 10}
-zonotope-batched;minkSum-1000d-b100-cpu;100;cpu;{"dim": 1000, "device": "cpu", "batch_size": 100}
-zonotope-batched;minkSum-1000d-b100-gpu;100;gpu;{"dim": 1000, "device": "gpu", "batch_size": 100}
+benchmark;instance;repetition;params
+test;startup-1d-cpu;1;{"operation": "startup", "dim": 1, "device": "cpu"}
+interval;generateRandom-1d-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu"}
+interval;generateRandom-1d-gpu;100;{"operation": "generateRandom", "dim": 1, "device": "gpu"}
+interval;generateRandom-2d-cpu;100;{"operation": "generateRandom", "dim": 2, "device": "cpu"}
+interval;generateRandom-2d-gpu;100;{"operation": "generateRandom", "dim": 2, "device": "gpu"}
+interval;generateRandom-5d-cpu;100;{"operation": "generateRandom", "dim": 5, "device": "cpu"}
+interval;generateRandom-5d-gpu;100;{"operation": "generateRandom", "dim": 5, "device": "gpu"}
+interval;generateRandom-10d-cpu;100;{"operation": "generateRandom", "dim": 10, "device": "cpu"}
+interval;generateRandom-10d-gpu;100;{"operation": "generateRandom", "dim": 10, "device": "gpu"}
+interval;generateRandom-50d-cpu;100;{"operation": "generateRandom", "dim": 50, "device": "cpu"}
+interval;generateRandom-50d-gpu;100;{"operation": "generateRandom", "dim": 50, "device": "gpu"}
+interval;generateRandom-100d-cpu;100;{"operation": "generateRandom", "dim": 100, "device": "cpu"}
+interval;generateRandom-100d-gpu;100;{"operation": "generateRandom", "dim": 100, "device": "gpu"}
+interval;generateRandom-500d-cpu;100;{"operation": "generateRandom", "dim": 500, "device": "cpu"}
+interval;generateRandom-500d-gpu;100;{"operation": "generateRandom", "dim": 500, "device": "gpu"}
+interval;generateRandom-1000d-cpu;100;{"operation": "generateRandom", "dim": 1000, "device": "cpu"}
+interval;generateRandom-1000d-gpu;100;{"operation": "generateRandom", "dim": 1000, "device": "gpu"}
+interval;matMul-1d-cpu;100;{"operation": "matMul", "dim": 1, "device": "cpu"}
+interval;matMul-1d-gpu;100;{"operation": "matMul", "dim": 1, "device": "gpu"}
+interval;matMul-2d-cpu;100;{"operation": "matMul", "dim": 2, "device": "cpu"}
+interval;matMul-2d-gpu;100;{"operation": "matMul", "dim": 2, "device": "gpu"}
+interval;matMul-5d-cpu;100;{"operation": "matMul", "dim": 5, "device": "cpu"}
+interval;matMul-5d-gpu;100;{"operation": "matMul", "dim": 5, "device": "gpu"}
+interval;matMul-10d-cpu;100;{"operation": "matMul", "dim": 10, "device": "cpu"}
+interval;matMul-10d-gpu;100;{"operation": "matMul", "dim": 10, "device": "gpu"}
+interval;matMul-50d-cpu;100;{"operation": "matMul", "dim": 50, "device": "cpu"}
+interval;matMul-50d-gpu;100;{"operation": "matMul", "dim": 50, "device": "gpu"}
+interval;matMul-100d-cpu;100;{"operation": "matMul", "dim": 100, "device": "cpu"}
+interval;matMul-100d-gpu;100;{"operation": "matMul", "dim": 100, "device": "gpu"}
+interval;matMul-500d-cpu;100;{"operation": "matMul", "dim": 500, "device": "cpu"}
+interval;matMul-500d-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu"}
+interval;matMul-1000d-cpu;100;{"operation": "matMul", "dim": 1000, "device": "cpu"}
+interval;matMul-1000d-gpu;100;{"operation": "matMul", "dim": 1000, "device": "gpu"}
+interval;minkSum-1d-cpu;100;{"operation": "minkSum", "dim": 1, "device": "cpu"}
+interval;minkSum-1d-gpu;100;{"operation": "minkSum", "dim": 1, "device": "gpu"}
+interval;minkSum-2d-cpu;100;{"operation": "minkSum", "dim": 2, "device": "cpu"}
+interval;minkSum-2d-gpu;100;{"operation": "minkSum", "dim": 2, "device": "gpu"}
+interval;minkSum-5d-cpu;100;{"operation": "minkSum", "dim": 5, "device": "cpu"}
+interval;minkSum-5d-gpu;100;{"operation": "minkSum", "dim": 5, "device": "gpu"}
+interval;minkSum-10d-cpu;100;{"operation": "minkSum", "dim": 10, "device": "cpu"}
+interval;minkSum-10d-gpu;100;{"operation": "minkSum", "dim": 10, "device": "gpu"}
+interval;minkSum-50d-cpu;100;{"operation": "minkSum", "dim": 50, "device": "cpu"}
+interval;minkSum-50d-gpu;100;{"operation": "minkSum", "dim": 50, "device": "gpu"}
+interval;minkSum-100d-cpu;100;{"operation": "minkSum", "dim": 100, "device": "cpu"}
+interval;minkSum-100d-gpu;100;{"operation": "minkSum", "dim": 100, "device": "gpu"}
+interval;minkSum-500d-cpu;100;{"operation": "minkSum", "dim": 500, "device": "cpu"}
+interval;minkSum-500d-gpu;100;{"operation": "minkSum", "dim": 500, "device": "gpu"}
+interval;minkSum-1000d-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu"}
+interval;minkSum-1000d-gpu;100;{"operation": "minkSum", "dim": 1000, "device": "gpu"}
+interval;convHull-1d-cpu;100;{"operation": "convHull", "dim": 1, "device": "cpu"}
+interval;convHull-1d-gpu;100;{"operation": "convHull", "dim": 1, "device": "gpu"}
+interval;convHull-2d-cpu;100;{"operation": "convHull", "dim": 2, "device": "cpu"}
+interval;convHull-2d-gpu;100;{"operation": "convHull", "dim": 2, "device": "gpu"}
+interval;convHull-5d-cpu;100;{"operation": "convHull", "dim": 5, "device": "cpu"}
+interval;convHull-5d-gpu;100;{"operation": "convHull", "dim": 5, "device": "gpu"}
+interval;convHull-10d-cpu;100;{"operation": "convHull", "dim": 10, "device": "cpu"}
+interval;convHull-10d-gpu;100;{"operation": "convHull", "dim": 10, "device": "gpu"}
+interval;convHull-50d-cpu;100;{"operation": "convHull", "dim": 50, "device": "cpu"}
+interval;convHull-50d-gpu;100;{"operation": "convHull", "dim": 50, "device": "gpu"}
+interval;convHull-100d-cpu;100;{"operation": "convHull", "dim": 100, "device": "cpu"}
+interval;convHull-100d-gpu;100;{"operation": "convHull", "dim": 100, "device": "gpu"}
+interval;convHull-500d-cpu;100;{"operation": "convHull", "dim": 500, "device": "cpu"}
+interval;convHull-500d-gpu;100;{"operation": "convHull", "dim": 500, "device": "gpu"}
+interval;convHull-1000d-cpu;100;{"operation": "convHull", "dim": 1000, "device": "cpu"}
+interval;convHull-1000d-gpu;100;{"operation": "convHull", "dim": 1000, "device": "gpu"}
+interval-batched;generateRandom-1d-b10-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-1d-b10-gpu;100;{"operation": "generateRandom", "dim": 1, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-1d-b100-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-1d-b100-gpu;100;{"operation": "generateRandom", "dim": 1, "device": "gpu", "batch_size": 100}
+interval-batched;generateRandom-2d-b10-cpu;100;{"operation": "generateRandom", "dim": 2, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-2d-b10-gpu;100;{"operation": "generateRandom", "dim": 2, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-2d-b100-cpu;100;{"operation": "generateRandom", "dim": 2, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-2d-b100-gpu;100;{"operation": "generateRandom", "dim": 2, "device": "gpu", "batch_size": 100}
+interval-batched;generateRandom-5d-b10-cpu;100;{"operation": "generateRandom", "dim": 5, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-5d-b10-gpu;100;{"operation": "generateRandom", "dim": 5, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-5d-b100-cpu;100;{"operation": "generateRandom", "dim": 5, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-5d-b100-gpu;100;{"operation": "generateRandom", "dim": 5, "device": "gpu", "batch_size": 100}
+interval-batched;generateRandom-10d-b10-cpu;100;{"operation": "generateRandom", "dim": 10, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-10d-b10-gpu;100;{"operation": "generateRandom", "dim": 10, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-10d-b100-cpu;100;{"operation": "generateRandom", "dim": 10, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-10d-b100-gpu;100;{"operation": "generateRandom", "dim": 10, "device": "gpu", "batch_size": 100}
+interval-batched;generateRandom-50d-b10-cpu;100;{"operation": "generateRandom", "dim": 50, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-50d-b10-gpu;100;{"operation": "generateRandom", "dim": 50, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-50d-b100-cpu;100;{"operation": "generateRandom", "dim": 50, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-50d-b100-gpu;100;{"operation": "generateRandom", "dim": 50, "device": "gpu", "batch_size": 100}
+interval-batched;generateRandom-100d-b10-cpu;100;{"operation": "generateRandom", "dim": 100, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-100d-b10-gpu;100;{"operation": "generateRandom", "dim": 100, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-100d-b100-cpu;100;{"operation": "generateRandom", "dim": 100, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-100d-b100-gpu;100;{"operation": "generateRandom", "dim": 100, "device": "gpu", "batch_size": 100}
+interval-batched;generateRandom-500d-b10-cpu;100;{"operation": "generateRandom", "dim": 500, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-500d-b10-gpu;100;{"operation": "generateRandom", "dim": 500, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-500d-b100-cpu;100;{"operation": "generateRandom", "dim": 500, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-500d-b100-gpu;100;{"operation": "generateRandom", "dim": 500, "device": "gpu", "batch_size": 100}
+interval-batched;generateRandom-1000d-b10-cpu;100;{"operation": "generateRandom", "dim": 1000, "device": "cpu", "batch_size": 10}
+interval-batched;generateRandom-1000d-b10-gpu;100;{"operation": "generateRandom", "dim": 1000, "device": "gpu", "batch_size": 10}
+interval-batched;generateRandom-1000d-b100-cpu;100;{"operation": "generateRandom", "dim": 1000, "device": "cpu", "batch_size": 100}
+interval-batched;generateRandom-1000d-b100-gpu;100;{"operation": "generateRandom", "dim": 1000, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-1d-b10-cpu;100;{"operation": "matMul", "dim": 1, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-1d-b10-gpu;100;{"operation": "matMul", "dim": 1, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-1d-b100-cpu;100;{"operation": "matMul", "dim": 1, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-1d-b100-gpu;100;{"operation": "matMul", "dim": 1, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-2d-b10-cpu;100;{"operation": "matMul", "dim": 2, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-2d-b10-gpu;100;{"operation": "matMul", "dim": 2, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-2d-b100-cpu;100;{"operation": "matMul", "dim": 2, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-2d-b100-gpu;100;{"operation": "matMul", "dim": 2, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-5d-b10-cpu;100;{"operation": "matMul", "dim": 5, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-5d-b10-gpu;100;{"operation": "matMul", "dim": 5, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-5d-b100-cpu;100;{"operation": "matMul", "dim": 5, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-5d-b100-gpu;100;{"operation": "matMul", "dim": 5, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-10d-b10-cpu;100;{"operation": "matMul", "dim": 10, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-10d-b10-gpu;100;{"operation": "matMul", "dim": 10, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-10d-b100-cpu;100;{"operation": "matMul", "dim": 10, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-10d-b100-gpu;100;{"operation": "matMul", "dim": 10, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-50d-b10-cpu;100;{"operation": "matMul", "dim": 50, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-50d-b10-gpu;100;{"operation": "matMul", "dim": 50, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-50d-b100-cpu;100;{"operation": "matMul", "dim": 50, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-50d-b100-gpu;100;{"operation": "matMul", "dim": 50, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-100d-b10-cpu;100;{"operation": "matMul", "dim": 100, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-100d-b10-gpu;100;{"operation": "matMul", "dim": 100, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-100d-b100-cpu;100;{"operation": "matMul", "dim": 100, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-100d-b100-gpu;100;{"operation": "matMul", "dim": 100, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-500d-b10-cpu;100;{"operation": "matMul", "dim": 500, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-500d-b10-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-500d-b100-cpu;100;{"operation": "matMul", "dim": 500, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-500d-b100-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu", "batch_size": 100}
+interval-batched;matMul-1000d-b10-cpu;100;{"operation": "matMul", "dim": 1000, "device": "cpu", "batch_size": 10}
+interval-batched;matMul-1000d-b10-gpu;100;{"operation": "matMul", "dim": 1000, "device": "gpu", "batch_size": 10}
+interval-batched;matMul-1000d-b100-cpu;100;{"operation": "matMul", "dim": 1000, "device": "cpu", "batch_size": 100}
+interval-batched;matMul-1000d-b100-gpu;100;{"operation": "matMul", "dim": 1000, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-1d-b10-cpu;100;{"operation": "minkSum", "dim": 1, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-1d-b10-gpu;100;{"operation": "minkSum", "dim": 1, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-1d-b100-cpu;100;{"operation": "minkSum", "dim": 1, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-1d-b100-gpu;100;{"operation": "minkSum", "dim": 1, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-2d-b10-cpu;100;{"operation": "minkSum", "dim": 2, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-2d-b10-gpu;100;{"operation": "minkSum", "dim": 2, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-2d-b100-cpu;100;{"operation": "minkSum", "dim": 2, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-2d-b100-gpu;100;{"operation": "minkSum", "dim": 2, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-5d-b10-cpu;100;{"operation": "minkSum", "dim": 5, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-5d-b10-gpu;100;{"operation": "minkSum", "dim": 5, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-5d-b100-cpu;100;{"operation": "minkSum", "dim": 5, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-5d-b100-gpu;100;{"operation": "minkSum", "dim": 5, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-10d-b10-cpu;100;{"operation": "minkSum", "dim": 10, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-10d-b10-gpu;100;{"operation": "minkSum", "dim": 10, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-10d-b100-cpu;100;{"operation": "minkSum", "dim": 10, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-10d-b100-gpu;100;{"operation": "minkSum", "dim": 10, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-50d-b10-cpu;100;{"operation": "minkSum", "dim": 50, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-50d-b10-gpu;100;{"operation": "minkSum", "dim": 50, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-50d-b100-cpu;100;{"operation": "minkSum", "dim": 50, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-50d-b100-gpu;100;{"operation": "minkSum", "dim": 50, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-100d-b10-cpu;100;{"operation": "minkSum", "dim": 100, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-100d-b10-gpu;100;{"operation": "minkSum", "dim": 100, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-100d-b100-cpu;100;{"operation": "minkSum", "dim": 100, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-100d-b100-gpu;100;{"operation": "minkSum", "dim": 100, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-500d-b10-cpu;100;{"operation": "minkSum", "dim": 500, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-500d-b10-gpu;100;{"operation": "minkSum", "dim": 500, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-500d-b100-cpu;100;{"operation": "minkSum", "dim": 500, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-500d-b100-gpu;100;{"operation": "minkSum", "dim": 500, "device": "gpu", "batch_size": 100}
+interval-batched;minkSum-1000d-b10-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu", "batch_size": 10}
+interval-batched;minkSum-1000d-b10-gpu;100;{"operation": "minkSum", "dim": 1000, "device": "gpu", "batch_size": 10}
+interval-batched;minkSum-1000d-b100-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu", "batch_size": 100}
+interval-batched;minkSum-1000d-b100-gpu;100;{"operation": "minkSum", "dim": 1000, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-1d-b10-cpu;100;{"operation": "convHull", "dim": 1, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-1d-b10-gpu;100;{"operation": "convHull", "dim": 1, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-1d-b100-cpu;100;{"operation": "convHull", "dim": 1, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-1d-b100-gpu;100;{"operation": "convHull", "dim": 1, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-2d-b10-cpu;100;{"operation": "convHull", "dim": 2, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-2d-b10-gpu;100;{"operation": "convHull", "dim": 2, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-2d-b100-cpu;100;{"operation": "convHull", "dim": 2, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-2d-b100-gpu;100;{"operation": "convHull", "dim": 2, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-5d-b10-cpu;100;{"operation": "convHull", "dim": 5, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-5d-b10-gpu;100;{"operation": "convHull", "dim": 5, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-5d-b100-cpu;100;{"operation": "convHull", "dim": 5, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-5d-b100-gpu;100;{"operation": "convHull", "dim": 5, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-10d-b10-cpu;100;{"operation": "convHull", "dim": 10, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-10d-b10-gpu;100;{"operation": "convHull", "dim": 10, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-10d-b100-cpu;100;{"operation": "convHull", "dim": 10, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-10d-b100-gpu;100;{"operation": "convHull", "dim": 10, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-50d-b10-cpu;100;{"operation": "convHull", "dim": 50, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-50d-b10-gpu;100;{"operation": "convHull", "dim": 50, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-50d-b100-cpu;100;{"operation": "convHull", "dim": 50, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-50d-b100-gpu;100;{"operation": "convHull", "dim": 50, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-100d-b10-cpu;100;{"operation": "convHull", "dim": 100, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-100d-b10-gpu;100;{"operation": "convHull", "dim": 100, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-100d-b100-cpu;100;{"operation": "convHull", "dim": 100, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-100d-b100-gpu;100;{"operation": "convHull", "dim": 100, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-500d-b10-cpu;100;{"operation": "convHull", "dim": 500, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-500d-b10-gpu;100;{"operation": "convHull", "dim": 500, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-500d-b100-cpu;100;{"operation": "convHull", "dim": 500, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-500d-b100-gpu;100;{"operation": "convHull", "dim": 500, "device": "gpu", "batch_size": 100}
+interval-batched;convHull-1000d-b10-cpu;100;{"operation": "convHull", "dim": 1000, "device": "cpu", "batch_size": 10}
+interval-batched;convHull-1000d-b10-gpu;100;{"operation": "convHull", "dim": 1000, "device": "gpu", "batch_size": 10}
+interval-batched;convHull-1000d-b100-cpu;100;{"operation": "convHull", "dim": 1000, "device": "cpu", "batch_size": 100}
+interval-batched;convHull-1000d-b100-gpu;100;{"operation": "convHull", "dim": 1000, "device": "gpu", "batch_size": 100}
+zonotope;generateRandom-1d-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu"}
+zonotope;generateRandom-1d-gpu;100;{"operation": "generateRandom", "dim": 1, "device": "gpu"}
+zonotope;generateRandom-2d-cpu;100;{"operation": "generateRandom", "dim": 2, "device": "cpu"}
+zonotope;generateRandom-2d-gpu;100;{"operation": "generateRandom", "dim": 2, "device": "gpu"}
+zonotope;generateRandom-5d-cpu;100;{"operation": "generateRandom", "dim": 5, "device": "cpu"}
+zonotope;generateRandom-5d-gpu;100;{"operation": "generateRandom", "dim": 5, "device": "gpu"}
+zonotope;generateRandom-10d-cpu;100;{"operation": "generateRandom", "dim": 10, "device": "cpu"}
+zonotope;generateRandom-10d-gpu;100;{"operation": "generateRandom", "dim": 10, "device": "gpu"}
+zonotope;generateRandom-50d-cpu;100;{"operation": "generateRandom", "dim": 50, "device": "cpu"}
+zonotope;generateRandom-50d-gpu;100;{"operation": "generateRandom", "dim": 50, "device": "gpu"}
+zonotope;generateRandom-100d-cpu;100;{"operation": "generateRandom", "dim": 100, "device": "cpu"}
+zonotope;generateRandom-100d-gpu;100;{"operation": "generateRandom", "dim": 100, "device": "gpu"}
+zonotope;generateRandom-500d-cpu;100;{"operation": "generateRandom", "dim": 500, "device": "cpu"}
+zonotope;generateRandom-500d-gpu;100;{"operation": "generateRandom", "dim": 500, "device": "gpu"}
+zonotope;generateRandom-1000d-cpu;100;{"operation": "generateRandom", "dim": 1000, "device": "cpu"}
+zonotope;generateRandom-1000d-gpu;100;{"operation": "generateRandom", "dim": 1000, "device": "gpu"}
+zonotope;matMul-1d-cpu;100;{"operation": "matMul", "dim": 1, "device": "cpu"}
+zonotope;matMul-1d-gpu;100;{"operation": "matMul", "dim": 1, "device": "gpu"}
+zonotope;matMul-2d-cpu;100;{"operation": "matMul", "dim": 2, "device": "cpu"}
+zonotope;matMul-2d-gpu;100;{"operation": "matMul", "dim": 2, "device": "gpu"}
+zonotope;matMul-5d-cpu;100;{"operation": "matMul", "dim": 5, "device": "cpu"}
+zonotope;matMul-5d-gpu;100;{"operation": "matMul", "dim": 5, "device": "gpu"}
+zonotope;matMul-10d-cpu;100;{"operation": "matMul", "dim": 10, "device": "cpu"}
+zonotope;matMul-10d-gpu;100;{"operation": "matMul", "dim": 10, "device": "gpu"}
+zonotope;matMul-50d-cpu;100;{"operation": "matMul", "dim": 50, "device": "cpu"}
+zonotope;matMul-50d-gpu;100;{"operation": "matMul", "dim": 50, "device": "gpu"}
+zonotope;matMul-100d-cpu;100;{"operation": "matMul", "dim": 100, "device": "cpu"}
+zonotope;matMul-100d-gpu;100;{"operation": "matMul", "dim": 100, "device": "gpu"}
+zonotope;matMul-500d-cpu;100;{"operation": "matMul", "dim": 500, "device": "cpu"}
+zonotope;matMul-500d-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu"}
+zonotope;matMul-1000d-cpu;100;{"operation": "matMul", "dim": 1000, "device": "cpu"}
+zonotope;matMul-1000d-gpu;100;{"operation": "matMul", "dim": 1000, "device": "gpu"}
+zonotope;minkSum-1d-cpu;100;{"operation": "minkSum", "dim": 1, "device": "cpu"}
+zonotope;minkSum-1d-gpu;100;{"operation": "minkSum", "dim": 1, "device": "gpu"}
+zonotope;minkSum-2d-cpu;100;{"operation": "minkSum", "dim": 2, "device": "cpu"}
+zonotope;minkSum-2d-gpu;100;{"operation": "minkSum", "dim": 2, "device": "gpu"}
+zonotope;minkSum-5d-cpu;100;{"operation": "minkSum", "dim": 5, "device": "cpu"}
+zonotope;minkSum-5d-gpu;100;{"operation": "minkSum", "dim": 5, "device": "gpu"}
+zonotope;minkSum-10d-cpu;100;{"operation": "minkSum", "dim": 10, "device": "cpu"}
+zonotope;minkSum-10d-gpu;100;{"operation": "minkSum", "dim": 10, "device": "gpu"}
+zonotope;minkSum-50d-cpu;100;{"operation": "minkSum", "dim": 50, "device": "cpu"}
+zonotope;minkSum-50d-gpu;100;{"operation": "minkSum", "dim": 50, "device": "gpu"}
+zonotope;minkSum-100d-cpu;100;{"operation": "minkSum", "dim": 100, "device": "cpu"}
+zonotope;minkSum-100d-gpu;100;{"operation": "minkSum", "dim": 100, "device": "gpu"}
+zonotope;minkSum-500d-cpu;100;{"operation": "minkSum", "dim": 500, "device": "cpu"}
+zonotope;minkSum-500d-gpu;100;{"operation": "minkSum", "dim": 500, "device": "gpu"}
+zonotope;minkSum-1000d-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu"}
+zonotope;minkSum-1000d-gpu;100;{"operation": "minkSum", "dim": 1000, "device": "gpu"}
+zonotope;convHull-1d-cpu;100;{"operation": "convHull", "dim": 1, "device": "cpu"}
+zonotope;convHull-1d-gpu;100;{"operation": "convHull", "dim": 1, "device": "gpu"}
+zonotope;convHull-2d-cpu;100;{"operation": "convHull", "dim": 2, "device": "cpu"}
+zonotope;convHull-2d-gpu;100;{"operation": "convHull", "dim": 2, "device": "gpu"}
+zonotope;convHull-5d-cpu;100;{"operation": "convHull", "dim": 5, "device": "cpu"}
+zonotope;convHull-5d-gpu;100;{"operation": "convHull", "dim": 5, "device": "gpu"}
+zonotope;convHull-10d-cpu;100;{"operation": "convHull", "dim": 10, "device": "cpu"}
+zonotope;convHull-10d-gpu;100;{"operation": "convHull", "dim": 10, "device": "gpu"}
+zonotope;convHull-50d-cpu;100;{"operation": "convHull", "dim": 50, "device": "cpu"}
+zonotope;convHull-50d-gpu;100;{"operation": "convHull", "dim": 50, "device": "gpu"}
+zonotope;convHull-100d-cpu;100;{"operation": "convHull", "dim": 100, "device": "cpu"}
+zonotope;convHull-100d-gpu;100;{"operation": "convHull", "dim": 100, "device": "gpu"}
+zonotope;convHull-500d-cpu;100;{"operation": "convHull", "dim": 500, "device": "cpu"}
+zonotope;convHull-500d-gpu;100;{"operation": "convHull", "dim": 500, "device": "gpu"}
+zonotope;convHull-1000d-cpu;100;{"operation": "convHull", "dim": 1000, "device": "cpu"}
+zonotope;convHull-1000d-gpu;100;{"operation": "convHull", "dim": 1000, "device": "gpu"}
+zonotope-batched;generateRandom-1d-b10-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-1d-b10-gpu;100;{"operation": "generateRandom", "dim": 1, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-1d-b100-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-1d-b100-gpu;100;{"operation": "generateRandom", "dim": 1, "device": "gpu", "batch_size": 100}
+zonotope-batched;generateRandom-2d-b10-cpu;100;{"operation": "generateRandom", "dim": 2, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-2d-b10-gpu;100;{"operation": "generateRandom", "dim": 2, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-2d-b100-cpu;100;{"operation": "generateRandom", "dim": 2, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-2d-b100-gpu;100;{"operation": "generateRandom", "dim": 2, "device": "gpu", "batch_size": 100}
+zonotope-batched;generateRandom-5d-b10-cpu;100;{"operation": "generateRandom", "dim": 5, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-5d-b10-gpu;100;{"operation": "generateRandom", "dim": 5, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-5d-b100-cpu;100;{"operation": "generateRandom", "dim": 5, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-5d-b100-gpu;100;{"operation": "generateRandom", "dim": 5, "device": "gpu", "batch_size": 100}
+zonotope-batched;generateRandom-10d-b10-cpu;100;{"operation": "generateRandom", "dim": 10, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-10d-b10-gpu;100;{"operation": "generateRandom", "dim": 10, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-10d-b100-cpu;100;{"operation": "generateRandom", "dim": 10, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-10d-b100-gpu;100;{"operation": "generateRandom", "dim": 10, "device": "gpu", "batch_size": 100}
+zonotope-batched;generateRandom-50d-b10-cpu;100;{"operation": "generateRandom", "dim": 50, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-50d-b10-gpu;100;{"operation": "generateRandom", "dim": 50, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-50d-b100-cpu;100;{"operation": "generateRandom", "dim": 50, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-50d-b100-gpu;100;{"operation": "generateRandom", "dim": 50, "device": "gpu", "batch_size": 100}
+zonotope-batched;generateRandom-100d-b10-cpu;100;{"operation": "generateRandom", "dim": 100, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-100d-b10-gpu;100;{"operation": "generateRandom", "dim": 100, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-100d-b100-cpu;100;{"operation": "generateRandom", "dim": 100, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-100d-b100-gpu;100;{"operation": "generateRandom", "dim": 100, "device": "gpu", "batch_size": 100}
+zonotope-batched;generateRandom-500d-b10-cpu;100;{"operation": "generateRandom", "dim": 500, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-500d-b10-gpu;100;{"operation": "generateRandom", "dim": 500, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-500d-b100-cpu;100;{"operation": "generateRandom", "dim": 500, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-500d-b100-gpu;100;{"operation": "generateRandom", "dim": 500, "device": "gpu", "batch_size": 100}
+zonotope-batched;generateRandom-1000d-b10-cpu;100;{"operation": "generateRandom", "dim": 1000, "device": "cpu", "batch_size": 10}
+zonotope-batched;generateRandom-1000d-b10-gpu;100;{"operation": "generateRandom", "dim": 1000, "device": "gpu", "batch_size": 10}
+zonotope-batched;generateRandom-1000d-b100-cpu;100;{"operation": "generateRandom", "dim": 1000, "device": "cpu", "batch_size": 100}
+zonotope-batched;generateRandom-1000d-b100-gpu;100;{"operation": "generateRandom", "dim": 1000, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-1d-b10-cpu;100;{"operation": "matMul", "dim": 1, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-1d-b10-gpu;100;{"operation": "matMul", "dim": 1, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-1d-b100-cpu;100;{"operation": "matMul", "dim": 1, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-1d-b100-gpu;100;{"operation": "matMul", "dim": 1, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-2d-b10-cpu;100;{"operation": "matMul", "dim": 2, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-2d-b10-gpu;100;{"operation": "matMul", "dim": 2, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-2d-b100-cpu;100;{"operation": "matMul", "dim": 2, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-2d-b100-gpu;100;{"operation": "matMul", "dim": 2, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-5d-b10-cpu;100;{"operation": "matMul", "dim": 5, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-5d-b10-gpu;100;{"operation": "matMul", "dim": 5, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-5d-b100-cpu;100;{"operation": "matMul", "dim": 5, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-5d-b100-gpu;100;{"operation": "matMul", "dim": 5, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-10d-b10-cpu;100;{"operation": "matMul", "dim": 10, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-10d-b10-gpu;100;{"operation": "matMul", "dim": 10, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-10d-b100-cpu;100;{"operation": "matMul", "dim": 10, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-10d-b100-gpu;100;{"operation": "matMul", "dim": 10, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-50d-b10-cpu;100;{"operation": "matMul", "dim": 50, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-50d-b10-gpu;100;{"operation": "matMul", "dim": 50, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-50d-b100-cpu;100;{"operation": "matMul", "dim": 50, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-50d-b100-gpu;100;{"operation": "matMul", "dim": 50, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-100d-b10-cpu;100;{"operation": "matMul", "dim": 100, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-100d-b10-gpu;100;{"operation": "matMul", "dim": 100, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-100d-b100-cpu;100;{"operation": "matMul", "dim": 100, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-100d-b100-gpu;100;{"operation": "matMul", "dim": 100, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-500d-b10-cpu;100;{"operation": "matMul", "dim": 500, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-500d-b10-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-500d-b100-cpu;100;{"operation": "matMul", "dim": 500, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-500d-b100-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu", "batch_size": 100}
+zonotope-batched;matMul-1000d-b10-cpu;100;{"operation": "matMul", "dim": 1000, "device": "cpu", "batch_size": 10}
+zonotope-batched;matMul-1000d-b10-gpu;100;{"operation": "matMul", "dim": 1000, "device": "gpu", "batch_size": 10}
+zonotope-batched;matMul-1000d-b100-cpu;100;{"operation": "matMul", "dim": 1000, "device": "cpu", "batch_size": 100}
+zonotope-batched;matMul-1000d-b100-gpu;100;{"operation": "matMul", "dim": 1000, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-1d-b10-cpu;100;{"operation": "minkSum", "dim": 1, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-1d-b10-gpu;100;{"operation": "minkSum", "dim": 1, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-1d-b100-cpu;100;{"operation": "minkSum", "dim": 1, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-1d-b100-gpu;100;{"operation": "minkSum", "dim": 1, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-2d-b10-cpu;100;{"operation": "minkSum", "dim": 2, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-2d-b10-gpu;100;{"operation": "minkSum", "dim": 2, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-2d-b100-cpu;100;{"operation": "minkSum", "dim": 2, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-2d-b100-gpu;100;{"operation": "minkSum", "dim": 2, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-5d-b10-cpu;100;{"operation": "minkSum", "dim": 5, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-5d-b10-gpu;100;{"operation": "minkSum", "dim": 5, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-5d-b100-cpu;100;{"operation": "minkSum", "dim": 5, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-5d-b100-gpu;100;{"operation": "minkSum", "dim": 5, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-10d-b10-cpu;100;{"operation": "minkSum", "dim": 10, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-10d-b10-gpu;100;{"operation": "minkSum", "dim": 10, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-10d-b100-cpu;100;{"operation": "minkSum", "dim": 10, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-10d-b100-gpu;100;{"operation": "minkSum", "dim": 10, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-50d-b10-cpu;100;{"operation": "minkSum", "dim": 50, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-50d-b10-gpu;100;{"operation": "minkSum", "dim": 50, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-50d-b100-cpu;100;{"operation": "minkSum", "dim": 50, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-50d-b100-gpu;100;{"operation": "minkSum", "dim": 50, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-100d-b10-cpu;100;{"operation": "minkSum", "dim": 100, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-100d-b10-gpu;100;{"operation": "minkSum", "dim": 100, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-100d-b100-cpu;100;{"operation": "minkSum", "dim": 100, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-100d-b100-gpu;100;{"operation": "minkSum", "dim": 100, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-500d-b10-cpu;100;{"operation": "minkSum", "dim": 500, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-500d-b10-gpu;100;{"operation": "minkSum", "dim": 500, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-500d-b100-cpu;100;{"operation": "minkSum", "dim": 500, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-500d-b100-gpu;100;{"operation": "minkSum", "dim": 500, "device": "gpu", "batch_size": 100}
+zonotope-batched;minkSum-1000d-b10-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu", "batch_size": 10}
+zonotope-batched;minkSum-1000d-b10-gpu;100;{"operation": "minkSum", "dim": 1000, "device": "gpu", "batch_size": 10}
+zonotope-batched;minkSum-1000d-b100-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu", "batch_size": 100}
+zonotope-batched;minkSum-1000d-b100-gpu;100;{"operation": "minkSum", "dim": 1000, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-1d-b10-cpu;100;{"operation": "convHull", "dim": 1, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-1d-b10-gpu;100;{"operation": "convHull", "dim": 1, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-1d-b100-cpu;100;{"operation": "convHull", "dim": 1, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-1d-b100-gpu;100;{"operation": "convHull", "dim": 1, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-2d-b10-cpu;100;{"operation": "convHull", "dim": 2, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-2d-b10-gpu;100;{"operation": "convHull", "dim": 2, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-2d-b100-cpu;100;{"operation": "convHull", "dim": 2, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-2d-b100-gpu;100;{"operation": "convHull", "dim": 2, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-5d-b10-cpu;100;{"operation": "convHull", "dim": 5, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-5d-b10-gpu;100;{"operation": "convHull", "dim": 5, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-5d-b100-cpu;100;{"operation": "convHull", "dim": 5, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-5d-b100-gpu;100;{"operation": "convHull", "dim": 5, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-10d-b10-cpu;100;{"operation": "convHull", "dim": 10, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-10d-b10-gpu;100;{"operation": "convHull", "dim": 10, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-10d-b100-cpu;100;{"operation": "convHull", "dim": 10, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-10d-b100-gpu;100;{"operation": "convHull", "dim": 10, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-50d-b10-cpu;100;{"operation": "convHull", "dim": 50, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-50d-b10-gpu;100;{"operation": "convHull", "dim": 50, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-50d-b100-cpu;100;{"operation": "convHull", "dim": 50, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-50d-b100-gpu;100;{"operation": "convHull", "dim": 50, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-100d-b10-cpu;100;{"operation": "convHull", "dim": 100, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-100d-b10-gpu;100;{"operation": "convHull", "dim": 100, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-100d-b100-cpu;100;{"operation": "convHull", "dim": 100, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-100d-b100-gpu;100;{"operation": "convHull", "dim": 100, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-500d-b10-cpu;100;{"operation": "convHull", "dim": 500, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-500d-b10-gpu;100;{"operation": "convHull", "dim": 500, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-500d-b100-cpu;100;{"operation": "convHull", "dim": 500, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-500d-b100-gpu;100;{"operation": "convHull", "dim": 500, "device": "gpu", "batch_size": 100}
+zonotope-batched;convHull-1000d-b10-cpu;100;{"operation": "convHull", "dim": 1000, "device": "cpu", "batch_size": 10}
+zonotope-batched;convHull-1000d-b10-gpu;100;{"operation": "convHull", "dim": 1000, "device": "gpu", "batch_size": 10}
+zonotope-batched;convHull-1000d-b100-cpu;100;{"operation": "convHull", "dim": 1000, "device": "cpu", "batch_size": 100}
+zonotope-batched;convHull-1000d-b100-gpu;100;{"operation": "convHull", "dim": 1000, "device": "gpu", "batch_size": 100}

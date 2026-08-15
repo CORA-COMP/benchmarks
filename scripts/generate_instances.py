@@ -54,6 +54,7 @@ OPERATIONS = [
     {"name": "generateRandom"},
     {"name": "matMul"},
     {"name": "minkSum"},
+    {"name": "convHull"},
 ]
 
 #: How often a tool repeats the operation inside one instance, so a single measurement
@@ -66,7 +67,10 @@ DEFAULT_REPETITIONS = 100
 #: start with ``{``. The cost is that no value may contain a semicolon — the writer
 #: raises rather than emitting a file that would parse wrong.
 DELIMITER = ";"
-HEADER = ["benchmark", "instance", "repetition", "device", "params"]
+#: There is no separate ``device`` column: the device is in ``params`` (where a tool reads
+#: it along with everything else it needs) and in the instance name (where it is visible
+#: without parsing JSON), so a third copy would only be one more thing to keep in step.
+HEADER = ["benchmark", "instance", "repetition", "params"]
 
 OUTPUT_FILE = "instances.csv"
 
@@ -79,9 +83,11 @@ def instance_name(operation: str, dim: int, batch_size, device: str) -> str:
 
 
 def params_for(operation: dict, dim: int, batch_size, device: str) -> dict:
-    """The JSON object the tool receives. ``batch_size`` appears only for the batched
-    benchmarks, so its absence is what tells a tool the operation is unbatched."""
-    params = {"dim": dim, "device": device}
+    """The JSON object the tool receives. The operation is in here as well as in the
+    instance name, so a tool can dispatch on one parsed field instead of splitting the
+    name. ``batch_size`` appears only for the batched benchmarks, so its absence is what
+    tells a tool the operation is unbatched."""
+    params = {"operation": operation["name"], "dim": dim, "device": device}
     if batch_size is not None:
         params["batch_size"] = batch_size
     extra = operation.get("params")
@@ -91,16 +97,15 @@ def params_for(operation: dict, dim: int, batch_size, device: str) -> dict:
 
 
 def rows(repetitions: int):
-    """Every ``(benchmark, instance, repetition, device, params)`` row: the overhead
-    instance, then each set representation unbatched and batched, and within each
-    operation, dimension, batch size, and device — so a cpu/gpu pair sits on adjacent
-    lines."""
+    """Every ``(benchmark, instance, repetition, params)`` row: the overhead instance, then
+    each set representation unbatched and batched, and within each operation, dimension,
+    batch size, and device — so a cpu/gpu pair sits on adjacent lines."""
     yield [
         OVERHEAD_BENCHMARK,
         instance_name(OVERHEAD_OPERATION, OVERHEAD_DIM, None, OVERHEAD_DEVICE),
         OVERHEAD_REPETITIONS,
-        OVERHEAD_DEVICE,
-        json.dumps({"dim": OVERHEAD_DIM, "device": OVERHEAD_DEVICE}),
+        json.dumps({"operation": OVERHEAD_OPERATION, "dim": OVERHEAD_DIM,
+                    "device": OVERHEAD_DEVICE}),
     ]
     for representation in BENCHMARKS:
         for benchmark, batch_sizes in (
@@ -115,7 +120,6 @@ def rows(repetitions: int):
                                 benchmark,
                                 instance_name(operation["name"], dim, batch_size, device),
                                 repetitions,
-                                device,
                                 json.dumps(params_for(operation, dim, batch_size, device)),
                             ]
 
