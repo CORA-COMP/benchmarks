@@ -19,7 +19,10 @@ import os
 import sys
 
 #: Set representations under test. One benchmark each, so a tool can enter a subset.
+#: ``test`` is not a representation: its operations do nothing, so what it measures is
+#: the harness and process overhead to subtract from the others.
 BENCHMARKS = [
+    "test",
     "interval",
     "zonotope",
 ]
@@ -27,12 +30,16 @@ BENCHMARKS = [
 #: Dimensions each operation is measured at.
 DIMENSIONS = [1, 2, 5, 10, 50, 100, 500, 1000]
 
-#: Operations, each measured at every dimension. ``params`` maps a dimension to the
-#: JSON object the tool receives; operations added later may take more than ``dim``.
+#: Where the operation runs. Both are always listed; a library without GPU support
+#: reports ``unknown`` for the gpu instances.
+DEVICES = ["cpu", "gpu"]
+
+#: Operations, each measured at every dimension on every device. ``params`` builds the
+#: JSON object the tool receives; operations added later may take more than dim/device.
 OPERATIONS = [
-    {"name": "generateRandom", "params": lambda dim: {"dim": dim}},
-    {"name": "matMul", "params": lambda dim: {"dim": dim}},
-    {"name": "minkSum", "params": lambda dim: {"dim": dim}},
+    {"name": "generateRandom", "params": lambda dim, device: {"dim": dim, "device": device}},
+    {"name": "matMul", "params": lambda dim, device: {"dim": dim, "device": device}},
+    {"name": "minkSum", "params": lambda dim, device: {"dim": dim, "device": device}},
 ]
 
 #: How often a tool repeats the operation inside one instance, so a single measurement
@@ -45,28 +52,30 @@ DEFAULT_REPETITIONS = 100
 #: start with ``{``. The cost is that no value may contain a semicolon — the writer
 #: raises rather than emitting a file that would parse wrong.
 DELIMITER = ";"
-HEADER = ["benchmark", "instance", "repetition", "params"]
+HEADER = ["benchmark", "instance", "repetition", "device", "params"]
 
 OUTPUT_FILE = "instances.csv"
 
 
-def instance_name(operation: str, dim: int) -> str:
-    return f"{operation}-{dim}d"
+def instance_name(operation: str, dim: int, device: str) -> str:
+    return f"{operation}-{dim}d-{device}"
 
 
 def rows(repetitions: int):
-    """Every ``(benchmark, instance, repetition, params)`` row, benchmark-major then
-    operation then dimension — the order the file is read in."""
+    """Every ``(benchmark, instance, repetition, device, params)`` row, benchmark-major
+    then operation, dimension, and device — so a cpu/gpu pair sits on adjacent lines."""
     for benchmark in BENCHMARKS:
         for operation in OPERATIONS:
             for dim in DIMENSIONS:
-                params = operation["params"](dim)
-                yield [
-                    benchmark,
-                    instance_name(operation["name"], dim),
-                    repetitions,
-                    json.dumps(params),
-                ]
+                for device in DEVICES:
+                    params = operation["params"](dim, device)
+                    yield [
+                        benchmark,
+                        instance_name(operation["name"], dim, device),
+                        repetitions,
+                        device,
+                        json.dumps(params),
+                    ]
 
 
 def render(repetitions: int) -> str:
