@@ -15,23 +15,32 @@ the JSON stays readable — a standard CSV reader still parses it, since a field
 as quoted when it *starts* with a quote. No value may contain a semicolon.
 
 ```
-benchmark;instance;repetition;params
-interval;generateRandom-1d-cpu;100;{"operation": "generateRandom", "dim": 1, "device": "cpu"}
-zonotope;matMul-500d-gpu;100;{"operation": "matMul", "dim": 500, "device": "gpu"}
-zonotope-batched;minkSum-1000d-b10-cpu;100;{"operation": "minkSum", "dim": 1000, "device": "cpu", "batch_size": 10}
+benchmark;instance;params
+interval;generateRandom-1d-cpu;{"set": "interval", "operation": "generateRandom", "dim": 1, "device": "cpu", "repetition": 100}
+zonotope;matMul-500d-gpu;{"set": "zonotope", "operation": "matMul", "dim": 500, "device": "gpu", "repetition": 100}
+zonotope-batched;minkSum-1000d-b10-cpu;{"set": "zonotope", "operation": "minkSum", "dim": 1000, "device": "cpu", "repetition": 100, "batch_size": 10}
 ```
 
 | Column | Meaning |
 | --- | --- |
 | `benchmark` | The set representation under test, batched or not. A tool enters one or more of them. |
 | `instance` | `<operation>-<n>d[-b<batch>]-<device>` — the operation, the dimension it runs at, the batch size for a batched benchmark, and where it runs. |
-| `repetition` | How often the tool repeats the operation *within* the instance, so one measurement averages over repeats rather than timing a single noisy call. |
-| `params` | JSON object with everything the operation needs: `operation`, `dim`, `device`, and `batch_size` on the batched benchmarks. Later operations may add more. |
+| `params` | JSON object with everything the tool needs (see below). |
 
-Everything a tool dispatches on is in `params`, so it never has to take the instance name
-apart; the name repeats the same facts in a form that is readable and sortable in the
-results table. There is deliberately no separate `device` column — a third copy would only
-be one more thing to keep in step.
+| `params` field | Meaning |
+| --- | --- |
+| `set` | The set representation to build — the benchmark without its `-batched` suffix. |
+| `operation` | What to do with it. |
+| `dim` | The dimension `n` to do it at. |
+| `device` | `cpu` or `gpu`. |
+| `repetition` | How often the tool repeats the operation *within* the instance, so one measurement averages over repeats rather than timing a single noisy call. |
+| `batch_size` | Only on the batched benchmarks; its absence is what says the operation is unbatched. |
+
+The two columns are the platform's — what a submission enters and what results are grouped
+by — and `params` is the tool's: everything a tool dispatches on is in there, so it never
+has to take a name apart. The instance name repeats those facts in a form that is readable
+and sortable in the results table, and nothing else does, since a second copy would only be
+one more thing to keep in step.
 
 Every column is passed to the tool's `prepare_instance.sh` / `run_instance.sh` in file
 order, after the interface version.
@@ -47,7 +56,8 @@ without a vectorized path can enter one without the other.
 Plus one that is not a set representation:
 
 - `test` — a single instance, `startup-1d-cpu`, run once. The tool starts up and does the
-  least it can: initialize one zonotope of dimension 1. What it measures is therefore the
+  least it can: initialize one set of dimension 1, of the representation its `set` names
+  (a zonotope). What it measures is therefore the
   fixed per-instance cost — process and library startup — to subtract from every other
   measurement. Enter it alongside whatever else you run.
 

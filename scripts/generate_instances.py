@@ -30,6 +30,7 @@ BENCHMARKS = [
 #: (process and library startup) to subtract from every other measurement, so it takes no
 #: dimension sweep, no batching, and no repetitions.
 OVERHEAD_BENCHMARK = "test"
+OVERHEAD_SET = "zonotope"
 OVERHEAD_OPERATION = "startup"
 OVERHEAD_DIM = 1
 OVERHEAD_DEVICE = "cpu"
@@ -67,10 +68,10 @@ DEFAULT_REPETITIONS = 100
 #: start with ``{``. The cost is that no value may contain a semicolon — the writer
 #: raises rather than emitting a file that would parse wrong.
 DELIMITER = ";"
-#: There is no separate ``device`` column: the device is in ``params`` (where a tool reads
-#: it along with everything else it needs) and in the instance name (where it is visible
-#: without parsing JSON), so a third copy would only be one more thing to keep in step.
-HEADER = ["benchmark", "instance", "repetition", "params"]
+#: The columns are the platform's — what to group by, what to call the row — and
+#: ``params`` is the tool's: everything a tool reads lives there, so no field needs a
+#: second copy in a column of its own.
+HEADER = ["benchmark", "instance", "params"]
 
 OUTPUT_FILE = "instances.csv"
 
@@ -82,12 +83,15 @@ def instance_name(operation: str, dim: int, batch_size, device: str) -> str:
     return f"{operation}-{dim}d{batch}-{device}"
 
 
-def params_for(operation: dict, dim: int, batch_size, device: str) -> dict:
-    """The JSON object the tool receives. The operation is in here as well as in the
-    instance name, so a tool can dispatch on one parsed field instead of splitting the
-    name. ``batch_size`` appears only for the batched benchmarks, so its absence is what
-    tells a tool the operation is unbatched."""
-    params = {"operation": operation["name"], "dim": dim, "device": device}
+def params_for(representation: str, operation: dict, dim: int, batch_size, device: str,
+               repetitions: int) -> dict:
+    """The JSON object the tool receives — everything it needs to run the instance, so it
+    dispatches on parsed fields instead of splitting the benchmark and instance names.
+    ``set`` is the representation without the batched suffix, and ``batch_size`` appears
+    only for the batched benchmarks, so its absence is what tells a tool the operation is
+    unbatched."""
+    params = {"set": representation, "operation": operation["name"], "dim": dim,
+              "device": device, "repetition": repetitions}
     if batch_size is not None:
         params["batch_size"] = batch_size
     extra = operation.get("params")
@@ -97,15 +101,15 @@ def params_for(operation: dict, dim: int, batch_size, device: str) -> dict:
 
 
 def rows(repetitions: int):
-    """Every ``(benchmark, instance, repetition, params)`` row: the overhead instance, then
-    each set representation unbatched and batched, and within each operation, dimension,
-    batch size, and device — so a cpu/gpu pair sits on adjacent lines."""
+    """Every ``(benchmark, instance, params)`` row: the overhead instance, then each set
+    representation unbatched and batched, and within each operation, dimension, batch
+    size, and device — so a cpu/gpu pair sits on adjacent lines."""
     yield [
         OVERHEAD_BENCHMARK,
         instance_name(OVERHEAD_OPERATION, OVERHEAD_DIM, None, OVERHEAD_DEVICE),
-        OVERHEAD_REPETITIONS,
-        json.dumps({"operation": OVERHEAD_OPERATION, "dim": OVERHEAD_DIM,
-                    "device": OVERHEAD_DEVICE}),
+        json.dumps({"set": OVERHEAD_SET, "operation": OVERHEAD_OPERATION,
+                    "dim": OVERHEAD_DIM, "device": OVERHEAD_DEVICE,
+                    "repetition": OVERHEAD_REPETITIONS}),
     ]
     for representation in BENCHMARKS:
         for benchmark, batch_sizes in (
@@ -119,8 +123,8 @@ def rows(repetitions: int):
                             yield [
                                 benchmark,
                                 instance_name(operation["name"], dim, batch_size, device),
-                                repetitions,
-                                json.dumps(params_for(operation, dim, batch_size, device)),
+                                json.dumps(params_for(representation, operation, dim,
+                                                      batch_size, device, repetitions)),
                             ]
 
 
