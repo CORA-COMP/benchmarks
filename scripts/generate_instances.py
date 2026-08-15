@@ -19,14 +19,21 @@ import os
 import sys
 
 #: Set representations under test. Each yields two benchmarks — the plain one and a
-#: ``-batched`` one — so a tool can enter either without the other. ``test`` is not a
-#: representation: its operations do nothing, so what it measures is the harness and
-#: process overhead to subtract from the others.
+#: ``-batched`` one — so a tool can enter either without the other.
 BENCHMARKS = [
-    "test",
     "interval",
     "zonotope",
 ]
+
+#: The overhead benchmark: a single instance, run once, doing the least a library can do —
+#: start up and initialize one zonotope. Its measured time is the fixed per-instance cost
+#: (process and library startup) to subtract from every other measurement, so it takes no
+#: dimension sweep, no batching, and no repetitions.
+OVERHEAD_BENCHMARK = "test"
+OVERHEAD_OPERATION = "startup"
+OVERHEAD_DIM = 1
+OVERHEAD_DEVICE = "cpu"
+OVERHEAD_REPETITIONS = 1
 
 #: Suffix and sizes of the batched variant, where the operation runs on a batch of sets
 #: at once. Absent ``batch_size`` in params means the unbatched benchmark.
@@ -84,9 +91,17 @@ def params_for(operation: dict, dim: int, batch_size, device: str) -> dict:
 
 
 def rows(repetitions: int):
-    """Every ``(benchmark, instance, repetition, device, params)`` row: each set
-    representation unbatched, then batched, and within each operation, dimension, batch
-    size, and device — so a cpu/gpu pair sits on adjacent lines."""
+    """Every ``(benchmark, instance, repetition, device, params)`` row: the overhead
+    instance, then each set representation unbatched and batched, and within each
+    operation, dimension, batch size, and device — so a cpu/gpu pair sits on adjacent
+    lines."""
+    yield [
+        OVERHEAD_BENCHMARK,
+        instance_name(OVERHEAD_OPERATION, OVERHEAD_DIM, None, OVERHEAD_DEVICE),
+        OVERHEAD_REPETITIONS,
+        OVERHEAD_DEVICE,
+        json.dumps({"dim": OVERHEAD_DIM, "device": OVERHEAD_DEVICE}),
+    ]
     for representation in BENCHMARKS:
         for benchmark, batch_sizes in (
             (representation, [None]),

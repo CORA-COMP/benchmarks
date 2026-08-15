@@ -37,16 +37,21 @@ order, after the interface version.
 Each set representation gives two benchmarks — plain and `-batched` — so a library
 without a vectorized path can enter one without the other.
 
-- `test` / `test-batched` — not a set representation. Its operations do nothing, so the
-  time they measure is the harness and process overhead, to subtract from the real
-  benchmarks.
 - `interval` / `interval-batched`
 - `zonotope` / `zonotope-batched`
+
+Plus one that is not a set representation:
+
+- `test` — a single instance, `startup-1d-cpu`, run once. The tool starts up and does the
+  least it can: initialize one zonotope of dimension 1. What it measures is therefore the
+  fixed per-instance cost — process and library startup — to subtract from every other
+  measurement. Enter it alongside whatever else you run.
 
 ## Operations
 
 Each is measured at every dimension `n ∈ {1, 2, 5, 10, 50, 100, 500, 1000}` on both
-devices. "Random set" always means a non-degenerate set of the requested dimension.
+devices, on the `interval` and `zonotope` benchmarks. "Random set" always means a
+non-degenerate set of the requested dimension. (`test` runs none of these — see above.)
 
 - **`generateRandom`** — initialize a random non-degenerate set of dimension `n` (for a
   zonotope, that means `n` generators).
